@@ -48,9 +48,10 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 --- 
-### POST /downloads
+### POST /reviews
 #### Parámetros del cuerpo
-- `price`: Integer (**requerido**)
+- `isNegative`: Boolean (**requerido**)
+- `description`: String (**requerido**)
 #### Respuesta
 - 200 OK 
 - 403 BAD_REQUEST
