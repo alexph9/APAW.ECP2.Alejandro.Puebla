@@ -5,15 +5,15 @@
 
 ##### Entidades
 
-![Mis entidades](https://github.com/alexph9/APAW.ECP1.Alejandro.Puebla/blob/master/docs/Entities.png)
+![Mis entidades](https://github.com/alexph9/APAW.ECP2.Alejandro.Puebla/blob/master/docs/Entities.png)
 
 ## Estado del código
 
 #### Build Status
 ###### Master
-![Build Status](https://travis-ci.org/alexph9/APAW.ECP1.Alejandro.Puebla.svg?branch=master) 
+![Build Status](https://travis-ci.org/alexph9/APAW.ECP2.Alejandro.Puebla.svg?branch=master) 
 ###### Develop
-![Build Status](https://travis-ci.org/alexph9/APAW.ECP1.Alejandro.Puebla.svg?branch=develop) 
+![Build Status](https://travis-ci.org/alexph9/APAW.ECP2.Alejandro.Puebla.svg?branch=develop) 
 
 #### Quality Gate
 ![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=es.upm.miw%3AAPAW.ECP1.Alejandro.Puebla&metric=alert_status)
