@@ -8,17 +8,16 @@ public class Artist {
 
     private boolean isSoloSinger;
 
-    public Artist(String id, String name, boolean isSoloSinger) {
-        this.id = id;
+    public Artist(String name, boolean isSoloSinger) {
         this.name = name;
         this.isSoloSinger = isSoloSinger;
     }
 
-    public void setId(String id){ this.id = id;}
-
     public String getId() {
         return id;
     }
+
+    public void setId(String id){ this.id = id;}
 
     public String getName() {
         return name;
@@ -34,5 +33,14 @@ public class Artist {
 
     public void setSoloSinger(boolean soloSinger) {
         this.isSoloSinger = soloSinger;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", isSoloSinger='" + isSoloSinger + '\'' +
+                '}';
     }
 }
