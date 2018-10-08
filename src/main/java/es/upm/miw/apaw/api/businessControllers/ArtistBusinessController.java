@@ -14,7 +14,8 @@ public class ArtistBusinessController {
     }
 
     public void updateName(String id, ArtistDto artistDto){
-        Artist artist = DaoFactory.getFactory().getArtistDao().read(id).orElseThrow(() -> new NotFoundException("Artist id: " + id));
+        Artist artist = DaoFactory.getFactory().getArtistDao().read(id).orElseThrow(() ->
+                new NotFoundException("Artist id: " + id));
         artist.setName(artistDto.getName());
         DaoFactory.getFactory().getArtistDao().save(artist);
     }

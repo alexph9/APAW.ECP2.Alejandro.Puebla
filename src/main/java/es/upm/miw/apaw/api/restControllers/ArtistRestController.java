@@ -11,21 +11,21 @@ public class ArtistRestController {
 
     private ArtistBusinessController artistBusinessController = new ArtistBusinessController();
 
-    private void validate(Object property, String message){
-        if(property == null){
-            throw new ArgumentNotValidException(message + " is NULL");
+    private void validateArtistDTO(ArtistDto artistDto){
+        if(artistDto == null){
+            throw new ArgumentNotValidException("ArtistDto is Null");
+        } else if(artistDto.getName() == null) {
+            throw new ArgumentNotValidException("ArtistDto name is Null");
         }
     }
 
     public String create(ArtistDto artistDto){
-        this.validate(artistDto, "artistDto");
-        this.validate(artistDto.getName(), "ArtistDto name");
+        this.validateArtistDTO(artistDto);
         return this.artistBusinessController.create(artistDto);
     }
 
     public void update(String id, ArtistDto artistDto){
-        this.validate(artistDto, "artistDto");
-        this.validate(artistDto.getName(), "ArtistDto Name");
+        this.validateArtistDTO(artistDto);
         this.artistBusinessController.updateName(id, artistDto);
     }
 }
