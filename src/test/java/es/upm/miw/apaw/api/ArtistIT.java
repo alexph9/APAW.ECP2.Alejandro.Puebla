@@ -31,16 +31,41 @@ public class ArtistIT {
     }
 
     @Test
-    void testCreateArtistWithoutUserDto() {
+    void testCreateArtistWithoutArtistDto() {
         HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).body(null).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
-    void testCreateArtistWithoutUserDtoName() {
+    void testCreateArtistWithoutArtistDtoName() {
         HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).body(new ArtistDto(null)).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+    @Test
+    void testUpdateArtist() {
+        String id = this.createArtist();
+        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).path(ArtistRestController.ID)
+                .expandPath(id).body(new ArtistDto("Metallica")).put();
+        new Client().submit(request);
+    }
+
+    @Test
+    void testUpdateArtistWithoutArtistDto() {
+        String id = this.createArtist();
+        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).path(ArtistRestController.ID)
+                .expandPath(id).body(null).put();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+    @Test
+    void testUpdateArtistBadRequestException() {
+        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).path(ArtistRestController.ID)
+                .expandPath("incorrectPath").body(new ArtistDto("Metallica")).put();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
     }
 }
