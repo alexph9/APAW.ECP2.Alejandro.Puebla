@@ -10,11 +10,10 @@ public class ArtistTest {
     private Artist artist;
 
     @BeforeEach
-    void before(){ artist = new Artist("1", "U2", false);}
+    void before(){ artist = new Artist("U2", false);}
 
     @Test
     void testIdNameIsSoloSinger(){
-        assertEquals("1", artist.getId());
         assertEquals("U2", artist.getName());
         assertEquals(false, artist.isSoloSinger());
     }
