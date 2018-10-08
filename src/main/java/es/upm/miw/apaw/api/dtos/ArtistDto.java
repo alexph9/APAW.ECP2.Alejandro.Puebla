@@ -7,8 +7,14 @@ public class ArtistDto {
 
     private boolean isSoloSinger;
 
+    public ArtistDto(String name, boolean isSoloSinger) {
+        this.name = name;
+        this.isSoloSinger = isSoloSinger;
+    }
+
     public ArtistDto(String name) {
         this.name = name;
+        this.isSoloSinger = true;
     }
 
     public String getName() {
