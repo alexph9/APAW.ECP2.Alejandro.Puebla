@@ -7,6 +7,7 @@ import es.upm.miw.apaw.api.exceptions.ArgumentNotValidException;
 public class ArtistRestController {
 
     public static final String ARTISTS = "/artists";
+    public static final String ID = "/{id}";
 
     private ArtistBusinessController artistBusinessController = new ArtistBusinessController();
 
@@ -20,5 +21,11 @@ public class ArtistRestController {
         this.validate(artistDto, "artistDto");
         this.validate(artistDto.getName(), "ArtistDto name");
         return this.artistBusinessController.create(artistDto);
+    }
+
+    public void update(String id, ArtistDto artistDto){
+        this.validate(artistDto, "artistDto");
+        this.validate(artistDto.getName(), "ArtistDto Name");
+        this.artistBusinessController.updateName(id, artistDto);
     }
 }
