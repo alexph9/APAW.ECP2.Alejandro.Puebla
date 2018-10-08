@@ -1,6 +1,6 @@
 package es.upm.miw.apaw.api.restControllers;
 
-import es.upm.miw.apaw.api.businessControllers.ArtistBusinessController.ArtistBusinessController;
+import es.upm.miw.apaw.api.businessControllers.ArtistBusinessController;
 import es.upm.miw.apaw.api.dtos.ArtistDto;
 import es.upm.miw.apaw.api.exceptions.ArgumentNotValidException;
 

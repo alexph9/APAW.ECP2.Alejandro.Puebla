@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.api.businessControllers.ArtistBusinessController;
+package es.upm.miw.apaw.api.businessControllers;
 
 import es.upm.miw.apaw.api.daos.DaoFactory;
 import es.upm.miw.apaw.api.dtos.ArtistDto;
