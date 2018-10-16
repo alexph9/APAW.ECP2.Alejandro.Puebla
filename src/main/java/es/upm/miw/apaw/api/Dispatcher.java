@@ -3,10 +3,12 @@ package es.upm.miw.apaw.api;
 import es.upm.miw.apaw.api.daos.DaoFactory;
 import es.upm.miw.apaw.api.daos.memory.DaoMemoryFactory;
 import es.upm.miw.apaw.api.dtos.ArtistDto;
+import es.upm.miw.apaw.api.dtos.ReviewDto;
 import es.upm.miw.apaw.api.exceptions.ArgumentNotValidException;
 import es.upm.miw.apaw.api.exceptions.NotFoundException;
 import es.upm.miw.apaw.api.exceptions.RequestInvalidException;
 import es.upm.miw.apaw.api.restControllers.ArtistRestController;
+import es.upm.miw.apaw.api.restControllers.ReviewRestController;
 import es.upm.miw.apaw.http.HttpRequest;
 import es.upm.miw.apaw.http.HttpResponse;
 
@@ -19,6 +21,7 @@ public class Dispatcher {
     }
 
     private ArtistRestController artistRestController = new ArtistRestController();
+    private ReviewRestController reviewRestController = new ReviewRestController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -55,6 +58,8 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ArtistRestController.ARTISTS)) {
             response.setBody(this.artistRestController.create((ArtistDto) request.getBody()));
+        } else if(request.isEqualsPath(ReviewRestController.REVIEWS)){
+            this.reviewRestController.create((ReviewDto) request.getBody());
         } else {
             throw new RequestInvalidException("method error: " + request.getMethod());
         }
