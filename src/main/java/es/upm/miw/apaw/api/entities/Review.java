@@ -8,8 +8,7 @@ public class Review {
 
     private String description;
 
-    public Review(String id, boolean isNegative, String description) {
-        this.id = id;
+    public Review(boolean isNegative, String description) {
         this.isNegative = isNegative;
         this.description = description;
     }
