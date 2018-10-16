@@ -10,7 +10,7 @@ public class ReviewTest {
     private Review review;
 
     @BeforeEach
-    void before() { review = new Review("1", false, "Fantastic Song!"); }
+    void before() { review = new Review(false, "Fantastic Song!"); }
 
     @Test
     void testIdIsNegativeDescription(){
