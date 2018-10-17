@@ -13,4 +13,6 @@ public abstract class DaoFactory {
     public abstract ArtistDao getArtistDao();
 
     public abstract ReviewDao getReviewDao();
+
+    public abstract SongDao getSongDao();
 }
