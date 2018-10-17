@@ -32,8 +32,8 @@ public class SongDto {
         this.artistId = artistId;
     }
 
-    public String getGenre() {
-        return genre.toString();
+    public Genre getGenre() {
+        return genre;
     }
 
     public void setGenre(Genre genre) {
