@@ -1,20 +1,14 @@
-package es.upm.miw.apaw.entities;
-public class Review {
+package es.upm.miw.apaw.api.dtos;
 
-    private String id;
+public class ReviewDto {
+
 
     private boolean isNegative;
-
     private String description;
 
-    public Review(String id, boolean isNegative, String description) {
-        this.id = id;
+    public ReviewDto(boolean isNegative, String description) {
         this.isNegative = isNegative;
         this.description = description;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public boolean isNegative() {
@@ -31,5 +25,13 @@ public class Review {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "isNegative='" + isNegative + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

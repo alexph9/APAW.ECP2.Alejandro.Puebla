@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.entities;
+package es.upm.miw.apaw.api.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +17,7 @@ public class Song {
 
     private List<Download> downloads;
 
-    public Song(String id, String name, Artist artist, Genre genre) {
-        this.id = id;
+    public Song(String name, Artist artist, Genre genre) {
         this.name = name;
         this.date = LocalDateTime.now();
         this.artist = artist;
@@ -27,6 +26,10 @@ public class Song {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,5 +66,17 @@ public class Song {
 
     public void addDownload(Download download){
         this.downloads.add(download);
+    }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", artist=" + artist +
+                ", genre=" + genre +
+                ", downloads=" + downloads +
+                '}';
     }
 }

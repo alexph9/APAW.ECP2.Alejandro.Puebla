@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.entities;
+package es.upm.miw.apaw.api.entities;
 
 import java.time.LocalDateTime;
 
@@ -21,4 +21,11 @@ public class Download {
         return date;
     }
 
+    @Override
+    public String toString() {
+        return "Download{" +
+                "price=" + price +
+                ", date=" + date +
+                '}';
+    }
 }

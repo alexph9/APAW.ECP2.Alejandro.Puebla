@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.entities;
+package es.upm.miw.apaw.api.entities;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,12 @@ public class SongTest {
 
     @BeforeEach
     void before(){
-        artist = new Artist("1", "U2", false);
-        song = new Song("1", "One", artist, genre.ROCK );
+        artist = new Artist("U2", false);
+        song = new Song("One", artist, genre.ROCK );
     }
 
     @Test
     void testIdNameDateArtistGenre(){
-        assertEquals("1", song.getId());
         assertEquals("One", song.getName());
         assertNotNull(song.getDate());
         assertEquals(artist, song.getArtist());
@@ -29,7 +28,7 @@ public class SongTest {
 
     @Test
     void testSetArtist(){
-        Artist artist2 = new Artist("2", "Bono", true);
+        Artist artist2 = new Artist("Bono", true);
         song.setArtist(artist2);
         assertEquals(artist2, song.getArtist());
     }

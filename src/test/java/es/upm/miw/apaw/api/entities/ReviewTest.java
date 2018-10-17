@@ -1,4 +1,4 @@
-package es.upm.miw.apaw.entities;
+package es.upm.miw.apaw.api.entities;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,11 +10,10 @@ public class ReviewTest {
     private Review review;
 
     @BeforeEach
-    void before() { review = new Review("1", false, "Fantastic Song!"); }
+    void before() { review = new Review(false, "Fantastic Song!"); }
 
     @Test
     void testIdIsNegativeDescription(){
-        assertEquals("1", review.getId());
         assertEquals(false, review.isNegative());
         assertEquals("Fantastic Song!", review.getDescription());
     }
