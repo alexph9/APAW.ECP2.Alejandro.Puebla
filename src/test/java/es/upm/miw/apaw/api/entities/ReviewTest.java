@@ -14,7 +14,6 @@ public class ReviewTest {
 
     @Test
     void testIdIsNegativeDescription(){
-        assertEquals("1", review.getId());
         assertEquals(false, review.isNegative());
         assertEquals("Fantastic Song!", review.getDescription());
     }
