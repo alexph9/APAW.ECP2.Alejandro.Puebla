@@ -84,12 +84,6 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### GET /songs/search?q=profit:>=10
-#### Respuesta
-- 200 OK
-  - `[ {id:String,name:String} ]`
-- 403 BAD_REQUEST
----
 
 ## Estado del código
 

@@ -24,7 +24,7 @@ public abstract class GenericDaoMemory<T> implements GenericDao<T, String> {
         String id = this.getId(entity);
         if (id == null) {
             id = String.valueOf(this.id++);
-            this.setId(entity, String.valueOf(id));
+            this.setId(entity, id);
         }
         this.map.put(id, entity);
         LogManager.getLogger(this.getClass()).debug("   save: " + entity);

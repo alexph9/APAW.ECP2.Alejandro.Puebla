@@ -5,6 +5,7 @@ import es.upm.miw.apaw.api.daos.memory.DaoMemoryFactory;
 import es.upm.miw.apaw.api.dtos.ArtistDto;
 import es.upm.miw.apaw.api.dtos.ReviewDto;
 import es.upm.miw.apaw.api.dtos.SongDto;
+import es.upm.miw.apaw.api.entities.Genre;
 import es.upm.miw.apaw.api.exceptions.ArgumentNotValidException;
 import es.upm.miw.apaw.api.exceptions.NotFoundException;
 import es.upm.miw.apaw.api.exceptions.RequestInvalidException;
@@ -15,8 +16,6 @@ import es.upm.miw.apaw.http.HttpRequest;
 import es.upm.miw.apaw.http.HttpResponse;
 
 public class Dispatcher {
-
-    private static final Object HttpStatus = new ArtistRestController() ;
 
     static {
         DaoFactory.setFactory(new DaoMemoryFactory());
@@ -34,14 +33,17 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request, response);
+                    break;
                 case PUT:
                     this.doPut(request);
                     break;
                 case PATCH:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doPatch(request);
+                    break;
                 case DELETE:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doDelete(request);
+                    break;
                 default:
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
@@ -77,4 +79,29 @@ public class Dispatcher {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(SongRestController.SONGS)) {
+            response.setBody(this.songRestController.readAll());
+        } else {
+            throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(SongRestController.SONGS + SongRestController.ID)) {
+            this.songRestController.delete("1");
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(SongRestController.SONGS + SongRestController.ID + SongRestController.GENRE)) {
+            this.songRestController.updateCategory("1", (Genre) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
 }
