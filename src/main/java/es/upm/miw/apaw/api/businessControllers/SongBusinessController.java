@@ -25,4 +25,6 @@ public class SongBusinessController {
                 song -> new SongIdNameDto(song)
         ).collect(Collectors.toList());
     }
+
+    public void delete(String id){ DaoFactory.getFactory().getSongDao().deleteById(id);}
 }

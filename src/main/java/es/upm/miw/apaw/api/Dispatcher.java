@@ -40,7 +40,8 @@ public class Dispatcher {
                 case PATCH:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case DELETE:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doDelete(request);
+                    break;
                 default:
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
@@ -84,4 +85,13 @@ public class Dispatcher {
             throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(SongRestController.SONGS + SongRestController.ID)) {
+            this.songRestController.delete(request.getPath(1));
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
 }

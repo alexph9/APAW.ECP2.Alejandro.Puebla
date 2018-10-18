@@ -33,16 +33,16 @@ public class SongIT {
         this.createSong("Song one");
     }
 
-    private String createArtist(){
-        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).body(new ArtistDto("U2")).post();
-        return (String) new Client().submit(request).getBody();
-    }
-
-    private void createSong(String song){
+    private String createSong(String song){
         String artistId = this.createArtist();
         HttpRequest request = HttpRequest.builder(SongRestController.SONGS)
                 .body(new SongDto(song, artistId, Genre.ROCK)).post();
-        new Client().submit(request);
+        return (String) new Client().submit(request).getBody();
+    }
+
+    private String createArtist(){
+        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).body(new ArtistDto("U2")).post();
+        return (String) new Client().submit(request).getBody();
     }
 
     @Test
@@ -70,6 +70,17 @@ public class SongIT {
         HttpRequest request = HttpRequest.builder(SongRestController.SONGS).get();
         List<SongIdNameDto> songs = (List<SongIdNameDto>) new Client().submit(request).getBody();
         assertTrue(songs.size()>=5);
+    }
+
+    @Test
+    void testDelete() {
+        String id = this.createSong("uno");
+        HttpRequest request1 = HttpRequest.builder(SongRestController.SONGS).get();
+        int count = ((List<SongIdNameDto>) new Client().submit(request1).getBody()).size();
+        HttpRequest request2 = HttpRequest.builder(SongRestController.SONGS).path(ArtistRestController.ID)
+                .expandPath(id).delete();
+        new Client().submit(request2);
+        assertTrue(((List<SongIdNameDto>) new Client().submit(request1).getBody()).size()<=count);
     }
 
 }
