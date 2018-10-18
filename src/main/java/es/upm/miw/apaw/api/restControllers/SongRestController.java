@@ -10,6 +10,7 @@ import java.util.List;
 public class SongRestController {
 
     public static final String SONGS = "/songs";
+    public static final String ID = "/{id}";
 
     private SongBusinessController songBusinessController = new SongBusinessController();
 
@@ -29,4 +30,6 @@ public class SongRestController {
     }
 
     public List<SongIdNameDto> readAll() { return songBusinessController.readAll();}
+
+    public void delete(String id){ this.songBusinessController.delete(id);}
 }
