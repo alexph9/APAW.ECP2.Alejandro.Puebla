@@ -23,21 +23,21 @@ public class ReviewIT {
 
     @Test
     void testCreateReview(){
-        HttpRequest request = HttpRequest.builder(ReviewRestController.REVIEWS)
+        HttpRequest request = HttpRequest.builder().path(ReviewRestController.REVIEWS)
                 .body(new ReviewDto(false, "Incredible Song!")).post();
         new Client().submit(request).getBody();
     }
 
     @Test
     void createReviewWithoutReviewDto(){
-        HttpRequest request = HttpRequest.builder(ReviewRestController.REVIEWS).body(null).post();
+        HttpRequest request = HttpRequest.builder().path(ReviewRestController.REVIEWS).body(null).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
     void testArtistInvalidRequest() {
-        HttpRequest request = HttpRequest.builder(ReviewRestController.REVIEWS).path("/invalid").body(null).post();
+        HttpRequest request = HttpRequest.builder().path(ReviewRestController.REVIEWS).path("/invalid").body(null).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }

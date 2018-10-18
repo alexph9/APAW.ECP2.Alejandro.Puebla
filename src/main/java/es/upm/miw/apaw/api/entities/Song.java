@@ -1,6 +1,7 @@
 package es.upm.miw.apaw.api.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Song {
@@ -22,6 +23,7 @@ public class Song {
         this.date = LocalDateTime.now();
         this.artist = artist;
         this.genre = genre;
+        this.downloads = new ArrayList<>();
     }
 
     public String getId() {

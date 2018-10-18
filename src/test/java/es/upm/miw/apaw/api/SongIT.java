@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SongIT {
+class SongIT {
 
     @BeforeAll
     static void before() {
@@ -35,19 +35,19 @@ public class SongIT {
 
     private String createSong(String song){
         String artistId = this.createArtist();
-        HttpRequest request = HttpRequest.builder(SongRestController.SONGS)
+        HttpRequest request = HttpRequest.builder().path(SongRestController.SONGS)
                 .body(new SongDto(song, artistId, Genre.ROCK)).post();
         return (String) new Client().submit(request).getBody();
     }
 
     private String createArtist(){
-        HttpRequest request = HttpRequest.builder(ArtistRestController.ARTISTS).body(new ArtistDto("U2")).post();
+        HttpRequest request = HttpRequest.builder().path(ArtistRestController.ARTISTS).body(new ArtistDto("U2")).post();
         return (String) new Client().submit(request).getBody();
     }
 
     @Test
     void createSongArtistIdNotFound(){
-        HttpRequest request = HttpRequest.builder(SongRestController.SONGS)
+        HttpRequest request = HttpRequest.builder().path(SongRestController.SONGS)
                 .body(new SongDto("Revolution",  "noexist", Genre.ROCK)).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
@@ -56,7 +56,7 @@ public class SongIT {
     @Test
     void createSongWithoutGenre(){
         String artistId = this.createArtist();
-        HttpRequest request = HttpRequest.builder(SongRestController.SONGS)
+        HttpRequest request = HttpRequest.builder().path(SongRestController.SONGS)
                 .body(new SongDto("Revolution",  artistId, null)).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
@@ -65,22 +65,30 @@ public class SongIT {
     @Test
     void testReadAll() {
         for (int i = 0; i < 5; i++) {
-            this.createSong("song"+i);
+            this.createSong("song" + i);
         }
-        HttpRequest request = HttpRequest.builder(SongRestController.SONGS).get();
+        HttpRequest request = HttpRequest.builder().path(SongRestController.SONGS).get();
         List<SongIdNameDto> songs = (List<SongIdNameDto>) new Client().submit(request).getBody();
-        assertTrue(songs.size()>=5);
+        assertTrue(songs.size() >= 5);
     }
 
     @Test
     void testDelete() {
         String id = this.createSong("uno");
-        HttpRequest request1 = HttpRequest.builder(SongRestController.SONGS).get();
+        HttpRequest request1 = HttpRequest.builder().path(SongRestController.SONGS).get();
         int count = ((List<SongIdNameDto>) new Client().submit(request1).getBody()).size();
-        HttpRequest request2 = HttpRequest.builder(SongRestController.SONGS).path(ArtistRestController.ID)
+        HttpRequest request2 = HttpRequest.builder().path(SongRestController.SONGS).path(ArtistRestController.ID)
                 .expandPath(id).delete();
         new Client().submit(request2);
-        assertTrue(((List<SongIdNameDto>) new Client().submit(request1).getBody()).size()<=count);
+        assertTrue(((List<SongIdNameDto>) new Client().submit(request1).getBody()).size() < count);
+    }
+
+    @Test
+    void testUpdateCategory() {
+        String id = this.createSong("uno");
+        HttpRequest request = HttpRequest.builder().path(SongRestController.SONGS).path(ArtistRestController.ID)
+                .expandPath(id).path(SongRestController.GENRE).body(Genre.METAL).patch();
+        new Client().submit(request);
     }
 
 }

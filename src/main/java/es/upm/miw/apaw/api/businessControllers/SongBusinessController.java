@@ -4,6 +4,7 @@ import es.upm.miw.apaw.api.daos.DaoFactory;
 import es.upm.miw.apaw.api.dtos.SongDto;
 import es.upm.miw.apaw.api.dtos.SongIdNameDto;
 import es.upm.miw.apaw.api.entities.Artist;
+import es.upm.miw.apaw.api.entities.Genre;
 import es.upm.miw.apaw.api.entities.Song;
 import es.upm.miw.apaw.api.exceptions.NotFoundException;
 
@@ -27,4 +28,11 @@ public class SongBusinessController {
     }
 
     public void delete(String id){ DaoFactory.getFactory().getSongDao().deleteById(id);}
+
+    public void updateGenre(String songId, Genre genre){
+        Song song = DaoFactory.getFactory().getSongDao().read(songId)
+                .orElseThrow(() -> new NotFoundException("Song (" + songId + ")"));
+        song.setGenre(genre);
+        DaoFactory.getFactory().getSongDao().save(song);
+    }
 }
