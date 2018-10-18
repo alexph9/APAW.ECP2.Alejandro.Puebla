@@ -2,7 +2,10 @@ package es.upm.miw.apaw.api.restControllers;
 
 import es.upm.miw.apaw.api.businessControllers.SongBusinessController;
 import es.upm.miw.apaw.api.dtos.SongDto;
+import es.upm.miw.apaw.api.dtos.SongIdNameDto;
 import es.upm.miw.apaw.api.exceptions.ArgumentNotValidException;
+
+import java.util.List;
 
 public class SongRestController {
 
@@ -24,4 +27,6 @@ public class SongRestController {
             throw new ArgumentNotValidException(message + " is NULL");
         }
     }
+
+    public List<SongIdNameDto> readAll() { return songBusinessController.readAll();}
 }

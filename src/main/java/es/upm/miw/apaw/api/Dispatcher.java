@@ -16,8 +16,6 @@ import es.upm.miw.apaw.http.HttpResponse;
 
 public class Dispatcher {
 
-    private static final Object HttpStatus = new ArtistRestController() ;
-
     static {
         DaoFactory.setFactory(new DaoMemoryFactory());
     }
@@ -34,7 +32,8 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request, response);
+                    break;
                 case PUT:
                     this.doPut(request);
                     break;
@@ -75,6 +74,14 @@ public class Dispatcher {
             this.artistRestController.update(request.getPath(1), (ArtistDto) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(SongRestController.SONGS)) {
+            response.setBody(this.songRestController.readAll());
+        } else {
+            throw new RequestInvalidException("method error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 }
