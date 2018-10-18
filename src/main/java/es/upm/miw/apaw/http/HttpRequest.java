@@ -3,7 +3,7 @@ package es.upm.miw.apaw.http;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpRequest extends HttpBase{
+public class HttpRequest extends HttpBase {
 
     private String path;
 
@@ -21,8 +21,8 @@ public class HttpRequest extends HttpBase{
         this("", HttpMethod.GET);
     }
 
-    public static Builder builder(String path) {
-        return new Builder(path);
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String getPath(int order) {
@@ -93,9 +93,8 @@ public class HttpRequest extends HttpBase{
     public static class Builder {
         private HttpRequest httpRequest;
 
-        private Builder(String path) {
+        private Builder() {
             this.httpRequest = new HttpRequest();
-            this.httpRequest.path = path;
         }
 
         public Builder path(String path) {
@@ -151,4 +150,5 @@ public class HttpRequest extends HttpBase{
         }
 
     }
+
 }

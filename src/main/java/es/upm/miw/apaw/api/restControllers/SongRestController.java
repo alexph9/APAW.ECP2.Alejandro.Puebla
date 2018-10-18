@@ -31,7 +31,7 @@ public class SongRestController {
         }
     }
 
-    public List<SongIdNameDto> readAll() { return songBusinessController.readAll();}
+    public List<SongIdNameDto> readAll() { return this.songBusinessController.readAll();}
 
     public void delete(String id){ this.songBusinessController.delete(id);}
 

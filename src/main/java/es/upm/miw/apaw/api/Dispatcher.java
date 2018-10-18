@@ -90,7 +90,7 @@ public class Dispatcher {
 
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(SongRestController.SONGS + SongRestController.ID)) {
-            this.songRestController.delete(request.getPath(1));
+            this.songRestController.delete("1");
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
@@ -98,7 +98,7 @@ public class Dispatcher {
 
     private void doPatch(HttpRequest request) {
         if (request.isEqualsPath(SongRestController.SONGS + SongRestController.ID + SongRestController.GENRE)) {
-            this.songRestController.updateCategory(request.getPath(1), (Genre) request.getBody());
+            this.songRestController.updateCategory("1", (Genre) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

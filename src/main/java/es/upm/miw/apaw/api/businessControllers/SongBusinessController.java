@@ -31,7 +31,8 @@ public class SongBusinessController {
 
     public void updateGenre(String songId, Genre genre){
         Song song = DaoFactory.getFactory().getSongDao().read(songId)
-                .orElseThrow(() -> new NotFoundException("Theme (" + songId + ")"));
+                .orElseThrow(() -> new NotFoundException("Song (" + songId + ")"));
         song.setGenre(genre);
+        DaoFactory.getFactory().getSongDao().save(song);
     }
 }
